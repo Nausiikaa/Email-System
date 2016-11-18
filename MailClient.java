@@ -28,7 +28,12 @@ public class MailClient
     {
         return server.getNextMailItem(user);
     }
-
+    
+    public void numberOfEmails()
+    {
+        System.out.println("Emails restantes " + 
+                            server.howManyMailItems(user));
+    }
     /**
      * Print the next mail item (if any) for this user to the text 
      * terminal.

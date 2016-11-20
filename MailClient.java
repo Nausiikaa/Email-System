@@ -11,7 +11,12 @@ public class MailClient
     private MailServer server;
     // The user running this client.
     private String user;
-
+    // The autoanswer button.
+    private boolean autoAnswer;
+    // To eddit the message of autoanswer.
+    private String mensajeAutoAnswer;
+    // To eddit the Subject of the autoanswer.
+    private String asuntoAutoAnswer;
     /**
      * Create a mail client run by user and attached to the given server.
      */
@@ -26,9 +31,15 @@ public class MailClient
      */
     public MailItem getNextMailItem()
     {
-        return server.getNextMailItem(user);
-    }
-    
+            MailItem item = server.getNextMailItem(user);
+            if (item != null){
+               if (autoAnswer == true){
+                    System.out.println(mensajeAutoAnswer + asuntoAutoAnswer);
+                }
+            
+            }
+        return item;    
+        }        
     public void numberOfEmails()
     {
         System.out.println("Emails restantes " + 
@@ -59,5 +70,13 @@ public class MailClient
     {
         MailItem item = new MailItem(user, to, message, subject);
         server.post(item);
+    }
+    /**
+     * Activar la autorrespuesta
+     */
+    public void activarAutoRespuesta(boolean autoRespuesta, String mensajeAutoAnswer1,String asuntoAutoAnswer1)
+     { autoAnswer = autoRespuesta;
+       mensajeAutoAnswer = mensajeAutoAnswer1;
+       asuntoAutoAnswer = asuntoAutoAnswer1;
     }
 }
